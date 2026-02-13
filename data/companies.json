@@ -1,0 +1,2168 @@
+[
+  {
+    "name": "Microsoft",
+    "career_url": "https://careers.microsoft.com/us/en",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Google",
+    "career_url": "https://careers.google.com/jobs/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Amazon/AWS",
+    "career_url": "https://www.amazon.jobs/en/search?base_query=Hyderabad",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Meta/Facebook",
+    "career_url": "https://www.metacareers.com/jobs/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Apple",
+    "career_url": "https://jobs.apple.com/en-us/search?location=hyderabad-IND",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Oracle",
+    "career_url": "https://www.oracle.com/in/corporate/careers/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "IBM",
+    "career_url": "https://www.ibm.com/employment/entrylevel/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Intel",
+    "career_url": "https://jobs.intel.com/en/search-jobs/Hyderabad",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Qualcomm",
+    "career_url": "https://www.qualcomm.com/company/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "NVIDIA",
+    "career_url": "https://www.nvidia.com/en-us/about-nvidia/careers/",
+    "type": "MNC",
+    "priority": 3
+  },
+  {
+    "name": "SAP Labs",
+    "career_url": "https://jobs.sap.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Dell Technologies",
+    "career_url": "https://jobs.dell.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "HP Inc",
+    "career_url": "https://jobs.hp.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Cisco",
+    "career_url": "https://jobs.cisco.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "VMware",
+    "career_url": "https://careers.vmware.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "TCS",
+    "career_url": "https://www.tcs.com/careers",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Infosys",
+    "career_url": "https://www.infosys.com/careers/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Wipro",
+    "career_url": "https://careers.wipro.com/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "HCL Technologies",
+    "career_url": "https://www.hcltech.com/careers",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Tech Mahindra",
+    "career_url": "https://careers.techmahindra.com/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Cognizant",
+    "career_url": "https://careers.cognizant.com/in/en",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Capgemini",
+    "career_url": "https://www.capgemini.com/careers/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Accenture",
+    "career_url": "https://www.accenture.com/in-en/careers/jobsearch",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "LTI Mindtree",
+    "career_url": "https://www.ltimindtree.com/careers/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Mphasis",
+    "career_url": "https://careers.mphasis.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "L&T Infotech",
+    "career_url": "https://www.lntinfotech.com/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Hexaware",
+    "career_url": "https://hexaware.com/careers/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Cyient",
+    "career_url": "https://www.cyient.com/careers",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "ValueLabs",
+    "career_url": "https://www.valuelabs.com/careers",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Virtusa",
+    "career_url": "https://www.virtusa.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Zensar",
+    "career_url": "https://www.zensar.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Birlasoft",
+    "career_url": "https://www.birlasoft.com/company/careers",
+    "type": "MNC",
+    "priority": 3
+  },
+  {
+    "name": "CGI",
+    "career_url": "https://www.cgi.com/in/en-in/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "DXC Technology",
+    "career_url": "https://dxc.com/us/en/about-us/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Atos",
+    "career_url": "https://atos.net/en/careers",
+    "type": "MNC",
+    "priority": 3
+  },
+  {
+    "name": "Deloitte",
+    "career_url": "https://www2.deloitte.com/in/en/pages/careers/articles/careers-home.html",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "EY",
+    "career_url": "https://www.ey.com/en_in/careers",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "PwC",
+    "career_url": "https://www.pwc.in/careers.html",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "KPMG",
+    "career_url": "https://home.kpmg/in/en/home/careers.html",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "McKinsey & Company",
+    "career_url": "https://www.mckinsey.com/careers",
+    "type": "MNC",
+    "priority": 3
+  },
+  {
+    "name": "BCG",
+    "career_url": "https://careers.bcg.com/",
+    "type": "MNC",
+    "priority": 3
+  },
+  {
+    "name": "Bain & Company",
+    "career_url": "https://www.bain.com/careers/",
+    "type": "MNC",
+    "priority": 3
+  },
+  {
+    "name": "JP Morgan Chase",
+    "career_url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Goldman Sachs",
+    "career_url": "https://www.goldmansachs.com/careers/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Morgan Stanley",
+    "career_url": "https://www.morganstanley.com/people-opportunities",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Bank of America",
+    "career_url": "https://careers.bankofamerica.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Citi",
+    "career_url": "https://jobs.citi.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Deutsche Bank",
+    "career_url": "https://www.db.com/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "HSBC",
+    "career_url": "https://www.hsbc.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Barclays",
+    "career_url": "https://home.barclays/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Wells Fargo",
+    "career_url": "https://www.wellsfargo.com/about/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "BNP Paribas",
+    "career_url": "https://group.bnpparibas/en/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Standard Chartered",
+    "career_url": "https://www.sc.com/en/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Franklin Templeton",
+    "career_url": "https://www.franklintempleton.com/investor/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Mu Sigma",
+    "career_url": "https://www.mu-sigma.com/careers.html",
+    "type": "Analytics",
+    "priority": 1
+  },
+  {
+    "name": "Fractal Analytics",
+    "career_url": "https://fractal.ai/careers/",
+    "type": "Analytics",
+    "priority": 1
+  },
+  {
+    "name": "LatentView Analytics",
+    "career_url": "https://www.latentview.com/careers/",
+    "type": "Analytics",
+    "priority": 1
+  },
+  {
+    "name": "Tiger Analytics",
+    "career_url": "https://www.tigeranalytics.com/careers/",
+    "type": "Analytics",
+    "priority": 1
+  },
+  {
+    "name": "Tredence",
+    "career_url": "https://www.tredence.com/careers",
+    "type": "Analytics",
+    "priority": 1
+  },
+  {
+    "name": "Absolutdata",
+    "career_url": "https://www.absolutdata.com/careers/",
+    "type": "Analytics",
+    "priority": 2
+  },
+  {
+    "name": "Sigmoid",
+    "career_url": "https://sigmoid.com/careers/",
+    "type": "Analytics",
+    "priority": 2
+  },
+  {
+    "name": "Celebal Technologies",
+    "career_url": "https://celebaltech.com/careers/",
+    "type": "Analytics",
+    "priority": 1
+  },
+  {
+    "name": "Thoucentric",
+    "career_url": "https://www.thoucentric.com/careers",
+    "type": "Analytics",
+    "priority": 1
+  },
+  {
+    "name": "Brillio",
+    "career_url": "https://www.brillio.com/careers/",
+    "type": "Analytics",
+    "priority": 2
+  },
+  {
+    "name": "Gramener",
+    "career_url": "https://gramener.com/careers/",
+    "type": "Analytics",
+    "priority": 2
+  },
+  {
+    "name": "BRIDGEi2i",
+    "career_url": "https://www.bridgei2i.com/careers/",
+    "type": "Analytics",
+    "priority": 2
+  },
+  {
+    "name": "Crayon Data",
+    "career_url": "https://crayondata.com/careers/",
+    "type": "Analytics",
+    "priority": 3
+  },
+  {
+    "name": "Convergytics",
+    "career_url": "https://www.convergytics.com/careers",
+    "type": "Analytics",
+    "priority": 3
+  },
+  {
+    "name": "Algoscale",
+    "career_url": "https://algoscale.com/careers/",
+    "type": "Analytics",
+    "priority": 2
+  },
+  {
+    "name": "PiTangent",
+    "career_url": "https://www.pitangent.com/careers",
+    "type": "Analytics",
+    "priority": 3
+  },
+  {
+    "name": "Cartesian Consulting",
+    "career_url": "https://www.cartesianconsulting.com/careers",
+    "type": "Analytics",
+    "priority": 3
+  },
+  {
+    "name": "Analyttica Datalab",
+    "career_url": "https://www.analyttica.com/careers",
+    "type": "Analytics",
+    "priority": 3
+  },
+  {
+    "name": "Tableau (Salesforce)",
+    "career_url": "https://www.tableau.com/careers",
+    "type": "Analytics",
+    "priority": 2
+  },
+  {
+    "name": "Qlik India",
+    "career_url": "https://www.qlik.com/us/company/careers",
+    "type": "Analytics",
+    "priority": 3
+  },
+  {
+    "name": "PhonePe",
+    "career_url": "https://www.phonepe.com/careers/",
+    "type": "Startup",
+    "priority": 1
+  },
+  {
+    "name": "Darwinbox",
+    "career_url": "https://darwinbox.com/careers",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Skyroot Aerospace",
+    "career_url": "https://www.skyroot.in/careers",
+    "type": "Startup",
+    "priority": 3
+  },
+  {
+    "name": "Bharat Biotech",
+    "career_url": "https://www.bharatbiotech.com/careers.html",
+    "type": "Startup",
+    "priority": 3
+  },
+  {
+    "name": "NxtWave",
+    "career_url": "https://www.ccbp.in/careers",
+    "type": "Startup",
+    "priority": 1
+  },
+  {
+    "name": "Keka HR",
+    "career_url": "https://www.keka.com/careers",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Hala Mobility",
+    "career_url": "https://halamobility.com/careers",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Rapido",
+    "career_url": "https://www.rapido.bike/careers",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Pure EV",
+    "career_url": "https://www.pureev.in/careers",
+    "type": "Startup",
+    "priority": 3
+  },
+  {
+    "name": "Ather Energy",
+    "career_url": "https://www.atherenergy.com/careers",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Freyr Energy",
+    "career_url": "https://www.freyrenergy.com/careers",
+    "type": "Startup",
+    "priority": 3
+  },
+  {
+    "name": "Digantara",
+    "career_url": "https://www.digantara.com/careers",
+    "type": "Startup",
+    "priority": 3
+  },
+  {
+    "name": "Recykal",
+    "career_url": "https://recykal.com/careers",
+    "type": "Startup",
+    "priority": 3
+  },
+  {
+    "name": "Donatekart",
+    "career_url": "https://www.donatekart.com/careers",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Qualcomm India",
+    "career_url": "https://www.qualcomm.com/company/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "HSBC EDP",
+    "career_url": "https://www.hsbc.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Amazon Dev Center",
+    "career_url": "https://www.amazon.jobs/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Verizon Data Services",
+    "career_url": "https://www.verizon.com/about/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "OPPO Mobiles India",
+    "career_url": "https://www.oppo.com/in/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Anritsu India",
+    "career_url": "https://www.anritsu.com/en-IN/about-us/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Vassar Labs",
+    "career_url": "https://vassarlabs.com/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Meta/Facebook India",
+    "career_url": "https://www.metacareers.com/jobs/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "PAREXEL",
+    "career_url": "https://jobs.parexel.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "RealPage India",
+    "career_url": "https://www.realpage.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "DSM Shared Services",
+    "career_url": "https://www.dsm.com/corporate/careers.html",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Codiant Software",
+    "career_url": "https://www.codiant.com/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "YASH Technologies",
+    "career_url": "https://www.yash.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Pegasystems",
+    "career_url": "https://www.pega.com/about/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Optum/UnitedHealth Group",
+    "career_url": "https://careers.unitedhealthgroup.com/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "CDK Global India",
+    "career_url": "https://www.cdkglobal.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "NCR Corporation",
+    "career_url": "https://www.ncr.com/company/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "MOBIS Technical Center",
+    "career_url": "https://mobis.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Syneos Health",
+    "career_url": "https://www.syneoshealth.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Mindtree",
+    "career_url": "https://www.mindtree.com/careers",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Model N (Revitas)",
+    "career_url": "https://www.modeln.com/company/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Pactera Technologies",
+    "career_url": "https://www.pactera.com/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Vitech Systems",
+    "career_url": "https://www.vitechinc.com/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "WNS Global",
+    "career_url": "https://www.wns.com/careers",
+    "type": "BPO",
+    "priority": 1
+  },
+  {
+    "name": "24-7 Intouch",
+    "career_url": "https://www.247intouch.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Dell",
+    "career_url": "https://jobs.dell.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "CSC (DXC Technology)",
+    "career_url": "https://dxc.com/us/en/about-us/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Pega Systems",
+    "career_url": "https://www.pega.com/about/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "United Technologies",
+    "career_url": "https://www.utc.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "OpenText",
+    "career_url": "https://www.opentext.com/about/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Intel",
+    "career_url": "https://jobs.intel.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Novartis",
+    "career_url": "https://www.novartis.com/careers",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Synchrony Financial",
+    "career_url": "https://careers.synchrony.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "AMD",
+    "career_url": "https://jobs.amd.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "State Bank of India IT",
+    "career_url": "https://bank.sbi/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "ICICI Bank IT",
+    "career_url": "https://www.icicibank.com/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "HDFC Bank IT",
+    "career_url": "https://www.hdfcbank.com/personal/about-us/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "Genpact",
+    "career_url": "https://careers.genpact.com/",
+    "type": "BPO",
+    "priority": 1
+  },
+  {
+    "name": "EXL Service",
+    "career_url": "https://www.exlservice.com/careers",
+    "type": "BPO",
+    "priority": 1
+  },
+  {
+    "name": "Sutherland Global",
+    "career_url": "https://www.sutherlandglobal.com/careers",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Concentrix",
+    "career_url": "https://jobs.concentrix.com/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Teleperformance",
+    "career_url": "https://www.teleperformance.com/en-us/careers",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Webhelp",
+    "career_url": "https://webhelp.com/en/careers",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "HGS (Hinduja Global)",
+    "career_url": "https://www.teamhgs.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Firstsource",
+    "career_url": "https://www.firstsource.com/careers",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Conduent",
+    "career_url": "https://www.conduent.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Dr. Reddy's Labs",
+    "career_url": "https://careers.drreddys.com/",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Sun Pharma",
+    "career_url": "https://www.sunpharma.com/careers",
+    "type": "Pharma",
+    "priority": 3
+  },
+  {
+    "name": "Aurobindo Pharma",
+    "career_url": "https://www.aurobindo.com/careers",
+    "type": "Pharma",
+    "priority": 3
+  },
+  {
+    "name": "Hetero Drugs",
+    "career_url": "https://www.heterodrugs.com/careers",
+    "type": "Pharma",
+    "priority": 3
+  },
+  {
+    "name": "Sureify",
+    "career_url": "https://sureify.com/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Fingent",
+    "career_url": "https://www.fingent.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "CitiusTech",
+    "career_url": "https://www.citiustech.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "iMerit",
+    "career_url": "https://imerit.net/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Nagarro",
+    "career_url": "https://www.nagarro.com/en/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Persistent Systems",
+    "career_url": "https://www.persistent.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "NIIT Technologies",
+    "career_url": "https://www.niit-tech.com/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Syntel (Atos)",
+    "career_url": "https://atos.net/en/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Zenoti",
+    "career_url": "https://www.zenoti.com/careers",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "HighRadius",
+    "career_url": "https://www.highradius.com/careers/",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Cyient",
+    "career_url": "https://www.cyient.com/careers",
+    "type": "Mid-sized",
+    "priority": 1
+  },
+  {
+    "name": "FactSet",
+    "career_url": "https://www.factset.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Invesco",
+    "career_url": "https://careers.invesco.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "GE Digital",
+    "career_url": "https://www.ge.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Philips",
+    "career_url": "https://www.careers.philips.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Siemens",
+    "career_url": "https://new.siemens.com/global/en/company/jobs.html",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Honeywell",
+    "career_url": "https://careers.honeywell.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Bosch",
+    "career_url": "https://www.bosch.in/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Schneider Electric",
+    "career_url": "https://www.se.com/in/en/about-us/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "ABB",
+    "career_url": "https://global.abb/group/en/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Broadcom",
+    "career_url": "https://www.broadcom.com/company/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Texas Instruments",
+    "career_url": "https://careers.ti.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Microchip Technology",
+    "career_url": "https://www.microchip.com/en-us/about/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Analog Devices",
+    "career_url": "https://www.analog.com/en/careers.html",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Teradata",
+    "career_url": "https://www.teradata.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Cloudera",
+    "career_url": "https://www.cloudera.com/careers.html",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Databricks",
+    "career_url": "https://www.databricks.com/company/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Red Hat",
+    "career_url": "https://www.redhat.com/en/jobs",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Adobe",
+    "career_url": "https://adobe.wd5.myworkdayjobs.com/external_experienced",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Salesforce",
+    "career_url": "https://www.salesforce.com/company/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "ServiceNow",
+    "career_url": "https://www.servicenow.com/careers.html",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Workday",
+    "career_url": "https://www.workday.com/en-us/company/careers.html",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Coupa Software",
+    "career_url": "https://www.coupa.com/company/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Akamai",
+    "career_url": "https://www.akamai.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "F5 Networks",
+    "career_url": "https://www.f5.com/company/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "NetApp",
+    "career_url": "https://www.netapp.com/company/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Western Digital",
+    "career_url": "https://jobs.westerndigital.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Seagate",
+    "career_url": "https://www.seagate.com/jobs/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "SanDisk",
+    "career_url": "https://www.sandisk.com/about/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Synopsys",
+    "career_url": "https://www.synopsys.com/careers.html",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Cadence Design Systems",
+    "career_url": "https://www.cadence.com/en_US/home/company/careers.html",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "ANSYS",
+    "career_url": "https://www.ansys.com/en-in/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Autodesk",
+    "career_url": "https://www.autodesk.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Dassault Systemes",
+    "career_url": "https://www.3ds.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Siemens PLM",
+    "career_url": "https://www.plm.automation.siemens.com/global/en/our-careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Newgen Software",
+    "career_url": "https://newgensoft.com/company/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Ramco Systems",
+    "career_url": "https://www.ramco.com/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Zoho",
+    "career_url": "https://www.zoho.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Freshworks",
+    "career_url": "https://www.freshworks.com/company/careers/",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Chargebee",
+    "career_url": "https://www.chargebee.com/careers/",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Zeta Global",
+    "career_url": "https://careers.zeta.global/",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Unacademy",
+    "career_url": "https://unacademy.com/careers/",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "upGrad",
+    "career_url": "https://www.upgrad.com/careers/",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "BYJU'S",
+    "career_url": "https://byjus.com/careers/",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Swiggy",
+    "career_url": "https://careers.swiggy.com/",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Zomato",
+    "career_url": "https://www.zomato.com/careers",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Ola",
+    "career_url": "https://ola.com/careers/",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Uber",
+    "career_url": "https://www.uber.com/us/en/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Paytm",
+    "career_url": "https://paytm.com/careers/",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Razorpay",
+    "career_url": "https://razorpay.com/jobs/",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Pine Labs",
+    "career_url": "https://www.pinelabs.com/careers",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "BillDesk",
+    "career_url": "https://www.billdesk.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Cerner Corporation",
+    "career_url": "https://www.cerner.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Epic Systems",
+    "career_url": "https://epic.avature.net/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Allscripts",
+    "career_url": "https://www.allscripts.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "GE Healthcare",
+    "career_url": "https://www.gehealthcare.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Medtronic",
+    "career_url": "https://www.medtronic.com/us-en/our-company/careers.html",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Johnson & Johnson",
+    "career_url": "https://www.careers.jnj.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Pfizer",
+    "career_url": "https://www.pfizer.com/about/careers",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Sanofi",
+    "career_url": "https://www.sanofi.com/en/careers",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "AstraZeneca",
+    "career_url": "https://careers.astrazeneca.com/",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Glenmark",
+    "career_url": "https://www.glenmarkpharma.com/careers",
+    "type": "Pharma",
+    "priority": 3
+  },
+  {
+    "name": "Lupin",
+    "career_url": "https://www.lupin.com/careers/",
+    "type": "Pharma",
+    "priority": 3
+  },
+  {
+    "name": "Cipla",
+    "career_url": "https://www.cipla.com/careers",
+    "type": "Pharma",
+    "priority": 3
+  },
+  {
+    "name": "Zydus Cadila",
+    "career_url": "https://www.zyduslife.com/careers/",
+    "type": "Pharma",
+    "priority": 3
+  },
+  {
+    "name": "Torrent Pharma",
+    "career_url": "https://www.torrentpharma.com/careers",
+    "type": "Pharma",
+    "priority": 3
+  },
+  {
+    "name": "Alcon",
+    "career_url": "https://www.alcon.com/careers",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Baxter",
+    "career_url": "https://www.baxter.com/careers",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Cognizant Technology Solutions",
+    "career_url": "https://careers.cognizant.com/in/en",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Infosys BPM",
+    "career_url": "https://www.infosysbpm.com/careers/",
+    "type": "BPO",
+    "priority": 1
+  },
+  {
+    "name": "Wipro BPS",
+    "career_url": "https://careers.wipro.com/bps",
+    "type": "BPO",
+    "priority": 1
+  },
+  {
+    "name": "HCL BPO",
+    "career_url": "https://www.hcltech.com/bpo-services/careers",
+    "type": "BPO",
+    "priority": 1
+  },
+  {
+    "name": "Tech Mahindra BPS",
+    "career_url": "https://careers.techmahindra.com/bps",
+    "type": "BPO",
+    "priority": 1
+  },
+  {
+    "name": "TCS BPO",
+    "career_url": "https://www.tcs.com/careers/bps",
+    "type": "BPO",
+    "priority": 1
+  },
+  {
+    "name": "Capita",
+    "career_url": "https://www.capita.com/careers",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Serco",
+    "career_url": "https://www.serco.com/careers",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Startek",
+    "career_url": "https://www.startek.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "iEnergizer",
+    "career_url": "https://www.ienergizer.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "AGS Health",
+    "career_url": "https://www.agshealth.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Infiniti Research",
+    "career_url": "https://www.infinitiresearch.com/careers",
+    "type": "Analytics",
+    "priority": 2
+  },
+  {
+    "name": "MarketsandMarkets",
+    "career_url": "https://www.marketsandmarkets.com/Careers",
+    "type": "Analytics",
+    "priority": 2
+  },
+  {
+    "name": "Nielsen",
+    "career_url": "https://www.nielsen.com/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Kantar",
+    "career_url": "https://www.kantar.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Ipsos",
+    "career_url": "https://www.ipsos.com/en/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "GfK",
+    "career_url": "https://www.gfk.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Merkle",
+    "career_url": "https://www.merkle.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Dunnhumby",
+    "career_url": "https://www.dunnhumby.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Epsilon",
+    "career_url": "https://www.epsilon.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Acxiom",
+    "career_url": "https://www.acxiom.com/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Neustar",
+    "career_url": "https://www.home.neustar/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Zeta Global",
+    "career_url": "https://careers.zeta.global/",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "Innodata",
+    "career_url": "https://www.innodata.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Lionbridge",
+    "career_url": "https://www.lionbridge.com/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Appen",
+    "career_url": "https://www.appen.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Clickworker",
+    "career_url": "https://www.clickworker.com/careers/",
+    "type": "Mid-sized",
+    "priority": 3
+  },
+  {
+    "name": "Playment",
+    "career_url": "https://playment.io/careers",
+    "type": "Startup",
+    "priority": 2
+  },
+  {
+    "name": "iMerit",
+    "career_url": "https://imerit.net/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Cogito Tech",
+    "career_url": "https://www.cogitotech.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Mindtree",
+    "career_url": "https://www.mindtree.com/careers",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "L&T Infotech",
+    "career_url": "https://www.lntinfotech.com/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Mphasis",
+    "career_url": "https://careers.mphasis.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Hexaware",
+    "career_url": "https://hexaware.com/careers/",
+    "type": "MNC",
+    "priority": 1
+  },
+  {
+    "name": "Sonata Software",
+    "career_url": "https://www.sonata-software.com/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "KPIT",
+    "career_url": "https://www.kpit.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "eInfochips",
+    "career_url": "https://www.einfochips.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Volansys",
+    "career_url": "https://www.volansys.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Tata Elxsi",
+    "career_url": "https://www.tataelxsi.com/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Larsen & Toubro Infotech",
+    "career_url": "https://www.lntinfotech.com/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Redington",
+    "career_url": "https://www.redington.com/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Ingram Micro",
+    "career_url": "https://www.ingrammicro.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "TTEC",
+    "career_url": "https://www.ttec.com/careers",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Alorica",
+    "career_url": "https://alorica.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Sitel Group",
+    "career_url": "https://www.sitel.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Sykes",
+    "career_url": "https://www.sykes.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "TaskUs",
+    "career_url": "https://www.taskus.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "iEnergizer",
+    "career_url": "https://www.ienergizer.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "AGS Health",
+    "career_url": "https://www.agshealth.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "Omega Healthcare",
+    "career_url": "https://www.omegahealthcare.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "MedAssist",
+    "career_url": "https://www.medassist.com/careers/",
+    "type": "BPO",
+    "priority": 2
+  },
+  {
+    "name": "vSplash",
+    "career_url": "https://www.vsplash.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "GlobusSoft",
+    "career_url": "https://www.globussoft.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Aspire Systems",
+    "career_url": "https://www.aspiresys.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Apexon",
+    "career_url": "https://www.apexon.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Emtec",
+    "career_url": "https://www.emtecinc.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Zensar Technologies",
+    "career_url": "https://www.zensar.com/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "R Systems",
+    "career_url": "https://www.r-systems.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "NeoSoft",
+    "career_url": "https://www.neosofttech.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Polaris Consulting",
+    "career_url": "https://www.polarisconsulting.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Silverlink Technologies",
+    "career_url": "https://www.silverlinktech.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "MSR COSMOS",
+    "career_url": "https://www.msrcosmos.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Cavisson Systems",
+    "career_url": "https://www.cavisson.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Impetus",
+    "career_url": "https://www.impetus.com/careers",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Kony",
+    "career_url": "https://www.kony.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Happiest Minds",
+    "career_url": "https://www.happiestminds.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Mindfire Solutions",
+    "career_url": "https://www.mindfiresolutions.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Trinity Infotech",
+    "career_url": "https://www.trinityinfotech.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "STL",
+    "career_url": "https://www.stl.tech/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "Tejas Networks",
+    "career_url": "https://www.tejasnetworks.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "HFCL",
+    "career_url": "https://www.hfcl.com/careers/",
+    "type": "Mid-sized",
+    "priority": 2
+  },
+  {
+    "name": "CenturyLink",
+    "career_url": "https://www.centurylink.com/about/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Tata Communications",
+    "career_url": "https://www.tatacommunications.com/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Bharti Airtel",
+    "career_url": "https://www.airtel.in/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Reliance Jio",
+    "career_url": "https://www.jio.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Vodafone Idea",
+    "career_url": "https://www.vodafoneidea.com/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Ericsson",
+    "career_url": "https://www.ericsson.com/en/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Nokia",
+    "career_url": "https://www.nokia.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Samsung",
+    "career_url": "https://www.samsung.com/in/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "LG",
+    "career_url": "https://www.lg.com/in/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Sony",
+    "career_url": "https://www.sony.co.in/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Panasonic",
+    "career_url": "https://www.panasonic.com/in/corporate/careers.html",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Toshiba",
+    "career_url": "https://www.toshiba.co.in/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Hitachi",
+    "career_url": "https://www.hitachi.co.in/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Mitsubishi Electric",
+    "career_url": "https://www.mitsubishielectric.in/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Fujitsu",
+    "career_url": "https://www.fujitsu.com/in/about/local/corporate/careers/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "NEC",
+    "career_url": "https://in.nec.com/careers.html",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Wipro GE Healthcare",
+    "career_url": "https://www.gehealthcare.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Philips Healthcare",
+    "career_url": "https://www.careers.philips.com/",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Siemens Healthineers",
+    "career_url": "https://www.siemens-healthineers.com/careers",
+    "type": "MNC",
+    "priority": 2
+  },
+  {
+    "name": "Roche",
+    "career_url": "https://www.roche.com/careers",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Abbott",
+    "career_url": "https://www.abbott.com/careers.html",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Biocon",
+    "career_url": "https://www.biocon.com/careers/",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Syngene",
+    "career_url": "https://www.syngeneintl.com/careers/",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Jubilant Biosys",
+    "career_url": "https://www.jubilantbiosys.com/careers/",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Piramal",
+    "career_url": "https://www.piramal.com/careers/",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Divis Labs",
+    "career_url": "https://www.divislabs.com/careers/",
+    "type": "Pharma",
+    "priority": 3
+  },
+  {
+    "name": "Granules India",
+    "career_url": "https://www.granulesindia.com/careers/",
+    "type": "Pharma",
+    "priority": 3
+  },
+  {
+    "name": "Laurus Labs",
+    "career_url": "https://www.lauruslabs.com/careers/",
+    "type": "Pharma",
+    "priority": 3
+  },
+  {
+    "name": "Mylan",
+    "career_url": "https://www.mylan.com/en/careers",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Amgen",
+    "career_url": "https://www.amgen.com/careers/",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Bristol Myers Squibb",
+    "career_url": "https://careers.bms.com/",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Merck",
+    "career_url": "https://www.merck.com/careers/",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Eli Lilly",
+    "career_url": "https://www.lilly.com/careers",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Gilead Sciences",
+    "career_url": "https://www.gilead.com/careers/",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Takeda",
+    "career_url": "https://www.takeda.com/careers/",
+    "type": "Pharma",
+    "priority": 2
+  },
+  {
+    "name": "Dabur",
+    "career_url": "https://www.dabur.com/careers",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Marico",
+    "career_url": "https://marico.com/careers/",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Godrej",
+    "career_url": "https://www.godrej.com/careers",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "ITC",
+    "career_url": "https://www.itcportal.com/careers/",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "HUL",
+    "career_url": "https://www.hul.co.in/careers/",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "P&G",
+    "career_url": "https://www.pgcareers.com/",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "Nestle",
+    "career_url": "https://www.nestle.com/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "PepsiCo",
+    "career_url": "https://www.pepsicojobs.com/",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "Coca-Cola",
+    "career_url": "https://www.coca-colacompany.com/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "Britannia",
+    "career_url": "https://www.britannia.co.in/careers",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Amul",
+    "career_url": "https://www.amul.com/careers",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Mahindra & Mahindra",
+    "career_url": "https://careers.mahindra.com/",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "Tata Motors",
+    "career_url": "https://www.tatamotors.com/careers/",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "Ashok Leyland",
+    "career_url": "https://www.ashokleyland.com/careers",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Bajaj Auto",
+    "career_url": "https://www.bajajauto.com/careers",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Hero MotoCorp",
+    "career_url": "https://www.heromotocorp.com/careers/",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Honda",
+    "career_url": "https://www.hondacarindia.com/careers",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Toyota",
+    "career_url": "https://www.toyotabharat.com/careers/",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Hyundai",
+    "career_url": "https://www.hyundai.com/in/en/careers",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Kia",
+    "career_url": "https://www.kia.com/in/careers.html",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "MG Motor",
+    "career_url": "https://www.mgmotor.co.in/careers",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Volvo",
+    "career_url": "https://www.volvogroup.com/careers.html",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Bharat Forge",
+    "career_url": "https://www.bharatforge.com/careers",
+    "type": "Non-IT",
+    "priority": 3
+  },
+  {
+    "name": "Cummins",
+    "career_url": "https://www.cummins.com/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "Eaton",
+    "career_url": "https://www.eaton.com/careers.html",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "Emerson",
+    "career_url": "https://www.emerson.com/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "Rockwell Automation",
+    "career_url": "https://www.rockwellautomation.com/careers.html",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "Johnson Controls",
+    "career_url": "https://www.johnsoncontrols.com/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "HAL",
+    "career_url": "https://hal-india.co.in/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "DRDO",
+    "career_url": "https://www.drdo.gov.in/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "ISRO",
+    "career_url": "https://www.isro.gov.in/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "BHEL",
+    "career_url": "https://www.bhel.com/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "NTPC",
+    "career_url": "https://www.ntpc.co.in/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "PowerGrid",
+    "career_url": "https://www.powergrid.in/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "ONGC",
+    "career_url": "https://www.ongcindia.com/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "GAIL",
+    "career_url": "https://gailonline.com/careers.html",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "BPCL",
+    "career_url": "https://www.bharatpetroleum.in/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "HPCL",
+    "career_url": "https://www.hindustanpetroleum.com/careers",
+    "type": "Non-IT",
+    "priority": 2
+  },
+  {
+    "name": "IOCL",
+    "career_url": "https://iocl.com/careers",
+    "type": "Non-IT",
+    "priority": 2
+  }
+]

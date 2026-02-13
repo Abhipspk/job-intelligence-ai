@@ -1,0 +1,114 @@
+2026-02-13 13:48:56,114 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-02-13 13:48:56,116 | INFO | Scheduler started
+2026-02-13 13:48:56,116 | INFO | Added job "run_job_scraper" to job store "default"
+2026-02-13 13:48:56,116 | INFO | Scheduler started
+2026-02-13 13:48:56,116 | INFO | Running job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 13:48:56 IST)" (scheduled at 2026-02-13 13:48:56.114429+05:30)
+2026-02-13 13:48:56,116 | INFO | Job scraper started
+2026-02-13 13:48:59,459 | ERROR | Traceback (most recent call last):
+  File "C:\Users\abhip\OneDrive\Desktop\Claude\assistant\main.py", line 230, in <module>
+    main()
+  File "C:\Users\abhip\OneDrive\Desktop\Claude\assistant\main.py", line 43, in main
+    print("\U0001f916 AUTOMATED JOB INTELLIGENCE SYSTEM")
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f916' in position 0: character maps to <undefined>
+
+2026-02-13 13:48:59,459 | INFO | Job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 19:48:56 IST)" executed successfully
+2026-02-13 13:48:59,459 | INFO | Scheduled job executed successfully
+2026-02-13 13:57:46,161 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-02-13 13:57:46,161 | INFO | Scheduler started
+2026-02-13 13:57:46,161 | INFO | Added job "run_job_scraper" to job store "default"
+2026-02-13 13:57:46,161 | INFO | Scheduler started
+2026-02-13 13:57:46,161 | INFO | Running job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 13:57:46 IST)" (scheduled at 2026-02-13 13:57:46.161274+05:30)
+2026-02-13 13:57:46,161 | INFO | Job scraper started
+2026-02-13 13:57:46,563 | ERROR | Traceback (most recent call last):
+  File "C:\Users\abhip\OneDrive\Desktop\Claude\assistant\main.py", line 237, in <module>
+    main()
+  File "C:\Users\abhip\OneDrive\Desktop\Claude\assistant\main.py", line 43, in main
+    print("\U0001f916 AUTOMATED JOB INTELLIGENCE SYSTEM")
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f916' in position 0: character maps to <undefined>
+
+2026-02-13 13:57:46,563 | INFO | Job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 19:57:46 IST)" executed successfully
+2026-02-13 13:57:46,563 | INFO | Scheduled job executed successfully
+2026-02-13 14:11:10,217 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-02-13 14:11:10,217 | INFO | Scheduler started
+2026-02-13 14:11:10,217 | INFO | Added job "run_job_scraper" to job store "default"
+2026-02-13 14:11:10,217 | INFO | Scheduler started
+2026-02-13 14:11:10,217 | INFO | Running job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 14:11:10 IST)" (scheduled at 2026-02-13 14:11:10.217979+05:30)
+2026-02-13 14:11:10,217 | INFO | Job scraper started
+2026-02-13 14:11:10,706 | ERROR | Traceback (most recent call last):
+  File "C:\Users\abhip\OneDrive\Desktop\Claude\assistant\main.py", line 237, in <module>
+    main()
+  File "C:\Users\abhip\OneDrive\Desktop\Claude\assistant\main.py", line 43, in main
+    print("\U0001f916 AUTOMATED JOB INTELLIGENCE SYSTEM")
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f916' in position 0: character maps to <undefined>
+
+2026-02-13 14:11:10,706 | INFO | Job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 20:11:10 IST)" executed successfully
+2026-02-13 14:11:10,706 | INFO | Scheduled job executed successfully
+2026-02-13 14:43:06,053 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-02-13 14:43:06,053 | INFO | Scheduler started
+2026-02-13 14:43:06,053 | INFO | Added job "run_job_scraper" to job store "default"
+2026-02-13 14:43:06,053 | INFO | Scheduler started
+2026-02-13 14:43:06,053 | INFO | Running job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 14:43:06 IST)" (scheduled at 2026-02-13 14:43:06.053041+05:30)
+2026-02-13 14:43:06,058 | INFO | Job scraper started
+2026-02-13 14:43:07,079 | ERROR | Traceback (most recent call last):
+  File "C:\Users\abhip\OneDrive\Desktop\Claude\assistant\main.py", line 237, in <module>
+    main()
+  File "C:\Users\abhip\OneDrive\Desktop\Claude\assistant\main.py", line 43, in main
+    print("\U0001f916 AUTOMATED JOB INTELLIGENCE SYSTEM")
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f916' in position 0: character maps to <undefined>
+
+2026-02-13 14:43:07,079 | INFO | Job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 20:43:06 IST)" executed successfully
+2026-02-13 14:43:07,079 | INFO | Scheduled job executed successfully
+2026-02-13 14:45:45,039 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-02-13 14:45:45,040 | INFO | Scheduler started
+2026-02-13 14:45:45,041 | INFO | Added job "run_job_scraper" to job store "default"
+2026-02-13 14:45:45,041 | INFO | Scheduler started
+2026-02-13 14:45:45,041 | INFO | Running job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 14:45:45 IST)" (scheduled at 2026-02-13 14:45:45.039378+05:30)
+2026-02-13 14:45:45,041 | INFO | Job scraper started
+2026-02-13 14:45:45,769 | ERROR | Traceback (most recent call last):
+  File "C:\Users\abhip\OneDrive\Desktop\Claude\assistant\main.py", line 237, in <module>
+    main()
+  File "C:\Users\abhip\OneDrive\Desktop\Claude\assistant\main.py", line 43, in main
+    print("\U0001f916 AUTOMATED JOB INTELLIGENCE SYSTEM")
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f916' in position 0: character maps to <undefined>
+
+2026-02-13 14:45:45,769 | INFO | Job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 20:45:45 IST)" executed successfully
+2026-02-13 14:45:45,769 | INFO | Scheduled job executed successfully
+2026-02-13 14:47:42,168 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-02-13 14:47:42,168 | INFO | Scheduler started
+2026-02-13 14:47:42,168 | INFO | Added job "run_job_scraper" to job store "default"
+2026-02-13 14:47:42,168 | INFO | Scheduler started
+2026-02-13 14:47:42,168 | INFO | Running job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 14:47:42 IST)" (scheduled at 2026-02-13 14:47:42.168813+05:30)
+2026-02-13 14:47:42,168 | INFO | Job scraper started
+2026-02-13 15:02:45,336 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-02-13 15:02:45,336 | INFO | Scheduler started
+2026-02-13 15:02:45,336 | INFO | Added job "run_job_scraper" to job store "default"
+2026-02-13 15:02:45,336 | INFO | Scheduler started
+2026-02-13 15:02:45,336 | INFO | Running job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 15:02:45 IST)" (scheduled at 2026-02-13 15:02:45.334505+05:30)
+2026-02-13 15:02:45,336 | INFO | Job scraper started
+2026-02-13 15:06:06,729 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-02-13 15:06:06,729 | INFO | Scheduler started
+2026-02-13 15:06:06,729 | INFO | Added job "run_job_scraper" to job store "default"
+2026-02-13 15:06:06,729 | INFO | Scheduler started
+2026-02-13 15:06:06,729 | INFO | Running job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 15:06:06 IST)" (scheduled at 2026-02-13 15:06:06.728388+05:30)
+2026-02-13 15:06:06,729 | INFO | Job scraper started
+2026-02-13 16:02:09,752 | INFO | Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-02-13 16:02:09,752 | INFO | Scheduler started
+2026-02-13 16:02:09,752 | INFO | Added job "run_job_scraper" to job store "default"
+2026-02-13 16:02:09,752 | INFO | Scheduler started
+2026-02-13 16:02:09,752 | INFO | Running job "run_job_scraper (trigger: interval[6:00:00], next run at: 2026-02-13 16:02:09 IST)" (scheduled at 2026-02-13 16:02:09.752808+05:30)
+2026-02-13 16:02:09,752 | INFO | Job scraper started

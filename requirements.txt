@@ -1,0 +1,10 @@
+streamlit
+pandas
+beautifulsoup4
+requests
+selenium
+webdriver-manager
+apscheduler
+psycopg2-binary
+sqlalchemy
+python-dotenv
