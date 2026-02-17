@@ -1,13 +1,23 @@
+# Core UI
 streamlit==1.40.2
 streamlit-option-menu==0.4.0
+
+# Data
 pandas==2.2.3
 plotly==6.1.2
+
+# Scraping (requests-based - works on Render)
 requests==2.32.5
 beautifulsoup4==4.14.2
 lxml==6.0.2
+
+# Selenium (local only - Render skips automatically)
 selenium==4.28.1
 webdriver-manager==4.0.2
 undetected-chromedriver==3.5.5
+
+# Scheduling
 apscheduler==3.11.2
+
+# Config
 python-dotenv==1.1.0
-SQLAlchemy==2.0.44

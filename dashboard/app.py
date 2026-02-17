@@ -1,613 +1,702 @@
+"""
+=============================================================================
+AI JOB INTELLIGENCE PORTAL - STREAMLIT APP v4.0
+Mobile-friendly | Real-time scraping | Full job management
+=============================================================================
+"""
 import streamlit as st
 import sqlite3
 import pandas as pd
-from datetime import datetime
-import subprocess
-import sys
+from datetime import datetime, timedelta
+import os, sys, threading, subprocess, json, time
 import plotly.express as px
 import plotly.graph_objects as go
-from streamlit_option_menu import option_menu
-import time
-import os
 
-DB_PATH = "database/jobs.db"
+# ============================================================
+# STREAMLIT OPTION MENU (graceful fallback if missing)
+# ============================================================
+try:
+    from streamlit_option_menu import option_menu
+    HAS_OPTION_MENU = True
+except ImportError:
+    HAS_OPTION_MENU = False
 
-# ===============================
+# ============================================================
 # PAGE CONFIG
-# ===============================
+# ============================================================
 st.set_page_config(
-    page_title="AI Job Intelligence Portal",
-    page_icon="🚀",
+    page_title="AI Job Portal | Abhilash",
+    page_icon="🤖",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"  # Mobile: collapsed by default
 )
 
-# Custom CSS for advanced styling
+# ============================================================
+# PATHS
+# ============================================================
+BASE_DIR  = os.path.dirname(os.path.abspath(__file__))
+DB_PATH   = os.environ.get("DB_PATH", os.path.join(BASE_DIR, "database", "jobs.db"))
+MAIN_PY   = os.path.join(BASE_DIR, "main.py")
+IS_RENDER = bool(os.environ.get("RENDER") or os.environ.get("RENDER_EXTERNAL_URL"))
+
+os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+
+# ============================================================
+# CSS - MOBILE RESPONSIVE + BEAUTIFUL
+# ============================================================
 st.markdown("""
 <style>
-    /* Main container styling */
-    .main {
-        padding: 0rem 1rem;
-    }
-    
-    /* Gradient text for headers */
-    .gradient-text {
+    /* Global */
+    * { box-sizing: border-box; }
+    .main { padding: 0.5rem 1rem !important; }
+
+    /* Hide default streamlit header on mobile */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+
+    /* Portal header */
+    .portal-header {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-weight: 700;
-    }
-    
-    /* Card styling */
-    .job-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 1.5rem;
-        border-radius: 15px;
-        margin-bottom: 1rem;
+        padding: 16px 20px;
+        border-radius: 16px;
         color: white;
-        transition: transform 0.3s ease;
-    }
-    
-    .job-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-    }
-    
-    /* Metric cards */
-    .metric-card {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         text-align: center;
-        transition: all 0.3s ease;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 20px rgba(102,126,234,0.4);
     }
-    
-    .metric-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    }
-    
-    /* Progress bar styling */
-    .stProgress > div > div > div > div {
-        background: linear-gradient(90deg, #667eea, #764ba2);
-    }
-    
-    /* Button styling */
-    .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    .portal-header h1 { margin: 0; font-size: 1.6rem; }
+    .portal-header p  { margin: 4px 0 0; opacity: 0.9; font-size: 0.9rem; }
+
+    /* Metric boxes */
+    .metric-box {
+        background: linear-gradient(135deg, #667eea, #764ba2);
         color: white;
-        border: none;
-        padding: 0.5rem 2rem;
-        border-radius: 25px;
-        font-weight: 600;
-        transition: all 0.3s ease;
+        border-radius: 12px;
+        padding: 14px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(102,126,234,0.3);
     }
-    
-    .stButton > button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    .metric-box .num  { font-size: 2rem; font-weight: 800; line-height: 1; }
+    .metric-box .lbl  { font-size: 0.75rem; opacity: 0.9; margin-top: 4px; }
+
+    /* Job cards */
+    .job-card {
+        background: white;
+        border-left: 5px solid #667eea;
+        padding: 14px 16px;
+        border-radius: 10px;
+        margin: 8px 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
-    
-    /* Sidebar styling */
-    .css-1d391kg {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    
-    /* Search bar styling */
-    .stTextInput > div > div > input {
-        border-radius: 25px;
-        border: 2px solid #667eea;
-        padding: 0.5rem 1rem;
-    }
-    
-    /* Badge styling */
+    .job-card.high  { border-left-color: #28a745; }
+    .job-card.med   { border-left-color: #ffc107; }
+    .job-card.low   { border-left-color: #dc3545; }
+
     .badge {
         display: inline-block;
-        padding: 0.25rem 1rem;
-        background: rgba(255, 255, 255, 0.2);
+        padding: 2px 10px;
         border-radius: 20px;
-        font-size: 0.8rem;
-        margin-right: 0.5rem;
+        font-size: 11px;
+        font-weight: 600;
     }
-    
-    /* Footer styling */
-    .footer {
-        text-align: center;
-        padding: 2rem;
-        color: #666;
-        font-size: 0.9rem;
+    .badge.high { background:#d4edda; color:#155724; }
+    .badge.med  { background:#fff3cd; color:#856404; }
+    .badge.low  { background:#f8d7da; color:#721c24; }
+    .badge.applied { background:#cce5ff; color:#004085; }
+
+    /* Company type pill */
+    .company-pill {
+        display: inline-block;
+        background: #e2e3f0;
+        color: #4a4a8a;
+        padding: 1px 8px;
+        border-radius: 12px;
+        font-size: 10px;
+    }
+
+    /* Status bar */
+    .status-bar {
+        background: #f0f2ff;
+        border-left: 4px solid #667eea;
+        padding: 10px 14px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        font-size: 13px;
+    }
+
+    /* Buttons */
+    .stButton>button {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 8px 20px;
+        font-weight: 600;
+        font-size: 13px;
+        transition: 0.2s;
+    }
+    .stButton>button:hover { opacity: 0.9; transform: scale(1.02); }
+
+    /* Link button */
+    .apply-btn {
+        display: inline-block;
+        background: #28a745;
+        color: white !important;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    /* Tab bar override */
+    .stTabs [data-baseweb="tab"] {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        .metric-box .num { font-size: 1.5rem; }
+        .portal-header h1 { font-size: 1.2rem; }
     }
 </style>
 """, unsafe_allow_html=True)
 
 
-# ===============================
-# LOAD DATA WITH ERROR HANDLING
-# ===============================
-@st.cache_data(ttl=60)
-@st.cache_data(ttl=60)
-def load_jobs():
+# ============================================================
+# DATABASE HELPERS
+# ============================================================
 
+@st.cache_resource
+def get_db_connection():
+    """Create persistent DB connection."""
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+def run_query(sql, params=()):
+    """Run a SELECT query and return DataFrame."""
     try:
-        conn = sqlite3.connect(DB_PATH)
-
-        # Check if jobs table exists
-        table = conn.execute("""
-            SELECT name FROM sqlite_master
-            WHERE type='table' AND name='jobs'
-        """).fetchone()
-
-        if not table:
-            return pd.DataFrame()
-
-        df = pd.read_sql_query(
-            "SELECT * FROM jobs ORDER BY job_id DESC",
-            conn
-        )
-
+        conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+        df = pd.read_sql_query(sql, conn, params=params)
         conn.close()
-
         return df
-
-    except Exception as e:
-        st.error(f"Database Error: {e}")
+    except Exception:
         return pd.DataFrame()
 
 
-# ===============================
-# RUN SCRAPER FROM WEBSITE
-# ===============================
-def run_scraper():
-    with st.spinner("Running scraper..."):
-        subprocess.Popen([sys.executable, "main.py"])
-        st.success("Scraper started")
+def run_write(sql, params=()):
+    """Run INSERT/UPDATE."""
+    try:
+        conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+        conn.execute(sql, params)
+        conn.commit()
+        conn.close()
+        return True
+    except Exception:
+        return False
 
-        
-        # Check if main.py exists before trying to run it
-        if os.path.exists("main.py"):
-            st.success("✅ Scrapers completed successfully!")
+
+def get_stats():
+    """Get dashboard statistics."""
+    stats = {"total": 0, "pending": 0, "high": 0, "applied": 0}
+    try:
+        conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+        cur = conn.cursor()
+        cur.execute("SELECT COUNT(*) FROM jobs")
+        stats["total"] = cur.fetchone()[0]
+        cur.execute("SELECT COUNT(*) FROM jobs WHERE applied=0")
+        stats["pending"] = cur.fetchone()[0]
+        cur.execute("SELECT COUNT(*) FROM jobs WHERE relevance_score>=65 AND applied=0")
+        stats["high"] = cur.fetchone()[0]
+        try:
+            cur.execute("SELECT COUNT(*) FROM applications")
+            stats["applied"] = cur.fetchone()[0]
+        except: pass
+        conn.close()
+    except Exception:
+        pass
+    return stats
+
+
+def mark_applied(job_id):
+    """Mark a job as applied and log it."""
+    try:
+        conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+        conn.execute("UPDATE jobs SET applied=1 WHERE job_id=?", (job_id,))
+        try:
+            conn.execute("""
+                INSERT OR IGNORE INTO applications
+                  (job_id, company, role, applied_date, status)
+                SELECT job_id, company, title, ?, 'Applied'
+                FROM jobs WHERE job_id=?
+            """, (datetime.now().strftime("%Y-%m-%d"), job_id))
+        except: pass
+        conn.commit()
+        conn.close()
+        return True
+    except Exception:
+        return False
+
+
+# ============================================================
+# BACKGROUND SCRAPER STATE
+# ============================================================
+if "scraper_status" not in st.session_state:
+    st.session_state.scraper_status = "idle"   # idle | running | done | error
+if "scraper_message" not in st.session_state:
+    st.session_state.scraper_message = ""
+if "last_run_time" not in st.session_state:
+    st.session_state.last_run_time = None
+
+_scraper_running = threading.Event()
+
+
+def _run_scraper_thread():
+    """Background thread to run the scraper."""
+    try:
+        result = subprocess.run(
+            [sys.executable, MAIN_PY],
+            cwd=BASE_DIR,
+            capture_output=True, text=True, timeout=3600
+        )
+        if result.returncode == 0:
+            st.session_state.scraper_status = "done"
+            st.session_state.scraper_message = "✅ Completed successfully"
         else:
-            # If no scraper, add a sample job
-            try:
-                conn = sqlite3.connect(DB_PATH)
-                cursor = conn.cursor()
-                
-                # Insert a sample job
-                cursor.execute('''
-                    INSERT INTO jobs (title, company, location, job_description, 
-                                    application_link, relevance_score, posting_date)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)
-                ''', (
-                    f"New Job {datetime.now().strftime('%H:%M')}",
-                    "Sample Company",
-                    "Remote",
-                    "This is a sample job description.",
-                    "https://example.com/apply",
-                    75,
-                    datetime.now().strftime('%Y-%m-%d')
-                ))
-                
-                conn.commit()
-                conn.close()
-                
-                # Clear cache to reload data
-                st.cache_data.clear()
-                
-                st.success("✅ Sample job added successfully!")
-                
-            except Exception as e:
-                st.error(f"Error adding sample job: {str(e)}")
+            st.session_state.scraper_status = "error"
+            st.session_state.scraper_message = f"⚠️ {result.stderr[:200]}"
+    except subprocess.TimeoutExpired:
+        st.session_state.scraper_status = "error"
+        st.session_state.scraper_message = "❌ Timed out (1 hour)"
+    except Exception as e:
+        st.session_state.scraper_status = "error"
+        st.session_state.scraper_message = f"❌ {str(e)[:200]}"
+    finally:
+        st.session_state.last_run_time = datetime.now()
+        _scraper_running.clear()
 
-# ===============================
-# ANALYTICS FUNCTIONS
-# ===============================
-def create_job_distribution_chart(df):
-    if df.empty:
-        return go.Figure()
-    
-    fig = px.pie(
-        df, 
-        names='company', 
-        title='Job Distribution by Company',
-        color_discrete_sequence=px.colors.sequential.Purples_r
-    )
-    fig.update_layout(
-        plot_bgcolor='rgba(0,0,0,0)',
-        paper_bgcolor='rgba(0,0,0,0)',
-        font_color='white'
-    )
-    return fig
 
-def create_match_score_distribution(df):
-    if df.empty:
-        return go.Figure()
-    
-    fig = px.histogram(
-        df, 
-        x='relevance_score', 
-        nbins=20,
-        title='Match Score Distribution',
-        color_discrete_sequence=['#667eea']
-    )
-    fig.update_layout(
-        plot_bgcolor='rgba(0,0,0,0)',
-        paper_bgcolor='rgba(0,0,0,0)',
-        font_color='white'
-    )
-    return fig
+def start_scraper():
+    """Start scraper in background thread."""
+    if not _scraper_running.is_set():
+        _scraper_running.set()
+        st.session_state.scraper_status = "running"
+        st.session_state.scraper_message = "🔄 Running... (5-15 min)"
+        t = threading.Thread(target=_run_scraper_thread, daemon=True)
+        t.start()
+        return True
+    return False
 
-# ===============================
-# HEADER WITH ANIMATION
-# ===============================
-col1, col2, col3 = st.columns([1,2,1])
-with col2:
-    st.markdown("<h1 style='text-align: center;'><span class='gradient-text'>🚀 AI Job Intelligence Portal</span></h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: #666;'>Your AI-Powered Job Search Assistant</p>", unsafe_allow_html=True)
 
-# Navigation Menu
-selected = option_menu(
-    menu_title=None,
-    options=["Dashboard", "Jobs", "Analytics", "Settings"],
-    icons=["house", "briefcase", "graph-up", "gear"],
-    menu_icon="cast",
-    default_index=1,
-    orientation="horizontal",
-    styles={
-        "container": {"padding": "0!important", "background-color": "transparent"},
-        "icon": {"color": "#667eea", "font-size": "20px"},
-        "nav-link": {"font-size": "16px", "text-align": "center", "margin": "0px", "color": "#666"},
-        "nav-link-selected": {"background-color": "#667eea"},
-    }
-)
+# ============================================================
+# SCORE HELPERS
+# ============================================================
+def score_class(score):
+    if score >= 70: return "high"
+    if score >= 50: return "med"
+    return "low"
 
-# ===============================
-# LOAD DATA WITH INITIALIZATION
-# ===============================
-# Initialize database on app start
+def score_badge(score):
+    cls = score_class(score)
+    return f'<span class="badge {cls}">{score:.0f}% Match</span>'
 
-# Load jobs data
-df = load_jobs()
 
-if df.empty:
-    st.warning("No jobs found in the database. Let's add some sample jobs!")
-    
-    col1, col2, col3 = st.columns(3)
-    with col2:
-        if st.button("🚀 Initialize with Sample Jobs", use_container_width=True):
-            run_scraper()
-            st.rerun()
-    
-    st.info("Click the button above to add sample jobs to get started!")
-    st.stop()
+# ============================================================
+# JOB CARD RENDERER
+# ============================================================
+def render_job_card(row, show_apply=True, key_prefix=""):
+    score = float(row.get("relevance_score", 0) or 0)
+    title = row.get("title", "Unknown")
+    company = row.get("company", "")
+    location = row.get("location", "")
+    exp = row.get("experience_required", "")
+    link = row.get("application_link", "")
+    source = row.get("source_platform", "")
+    job_id = row.get("job_id", 0)
+    applied = bool(row.get("applied", 0))
 
-# ===============================
-# MAIN CONTENT BASED ON NAVIGATION
-# ===============================
+    cls = score_class(score)
+    apply_tag = '<span class="badge applied">✅ Applied</span>' if applied else ""
 
-if selected == "Dashboard":
-    # Dashboard View
-    st.markdown("<h2><span class='gradient-text'>📊 Dashboard Overview</span></h2>", unsafe_allow_html=True)
-    
-    # Advanced Metrics Row
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
-        st.markdown("""
-        <div class='metric-card'>
-            <h3 style='color: #667eea; margin: 0;'>📊</h3>
-            <h2 style='margin: 0; color: #333;'>{}</h2>
-            <p style='color: #666; margin: 0;'>Total Jobs</p>
+    st.markdown(f"""
+    <div class="job-card {cls}">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:4px;">
+            <b style="font-size:14px; flex:1;">{title}</b>
+            <div>{score_badge(score)} {apply_tag}</div>
         </div>
-        """.format(len(df)), unsafe_allow_html=True)
-    
-    with col2:
-        high_match = len(df[df["relevance_score"] > 70])
-        st.markdown("""
-        <div class='metric-card'>
-            <h3 style='color: #667eea; margin: 0;'>🎯</h3>
-            <h2 style='margin: 0; color: #333;'>{}</h2>
-            <p style='color: #666; margin: 0;'>High Match Jobs</p>
+        <div style="margin-top:6px; font-size:12px; color:#555;">
+            🏢 <b>{company}</b> &nbsp;|&nbsp; 📍 {location} &nbsp;|&nbsp; 💼 {exp}
         </div>
-        """.format(high_match), unsafe_allow_html=True)
-    
-    with col3:
-        companies = df['company'].nunique()
-        st.markdown("""
-        <div class='metric-card'>
-            <h3 style='color: #667eea; margin: 0;'>🏢</h3>
-            <h2 style='margin: 0; color: #333;'>{}</h2>
-            <p style='color: #666; margin: 0;'>Companies</p>
+        <div style="margin-top:4px; font-size:11px; color:#888;">
+            🔌 {source}
         </div>
-        """.format(companies), unsafe_allow_html=True)
-    
-    with col4:
-        today = datetime.now().strftime("%Y-%m-%d")
-        today_jobs = len(df[df["posting_date"] == today])
-        st.markdown("""
-        <div class='metric-card'>
-            <h3 style='color: #667eea; margin: 0;'>📅</h3>
-            <h2 style='margin: 0; color: #333;'>{}</h2>
-            <p style='color: #666; margin: 0;'>Today's Jobs</p>
-        </div>
-        """.format(today_jobs), unsafe_allow_html=True)
-    
-    # Charts Row
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        fig1 = create_job_distribution_chart(df.head(10))
-        st.plotly_chart(fig1, use_container_width=True)
-    
-    with col2:
-        fig2 = create_match_score_distribution(df)
-        st.plotly_chart(fig2, use_container_width=True)
-    
-    # Recent Jobs Preview
-    st.markdown("<h3><span class='gradient-text'>🔥 Recent Hot Jobs</span></h3>", unsafe_allow_html=True)
-    recent_df = df.head(3)
-    cols = st.columns(3)
-    
-    for idx, (_, job) in enumerate(recent_df.iterrows()):
-        with cols[idx]:
-            st.markdown(f"""
-            <div class='job-card'>
-                <h4 style='margin: 0 0 10px 0;'>{job['title'][:30]}...</h4>
-                <p style='margin: 5px 0; opacity: 0.9;'>{job['company']}</p>
-                <p style='margin: 5px 0; opacity: 0.9;'>{job['location']}</p>
-                <div style='margin: 15px 0;'>
-                    <span class='badge'>Match: {job['relevance_score']}%</span>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
 
-elif selected == "Jobs":
-    # Jobs View
-    st.markdown("<h2><span class='gradient-text'>💼 Job Listings</span></h2>", unsafe_allow_html=True)
-    
-    # Action Row
-    colA, colB, colC = st.columns([3,2,1])
-    
-    with colB:
-        today_only = st.checkbox("📅 Show Only Today Jobs", help="Filter jobs posted today")
-    
-    with colC:
-        if st.button("🔄 Run Scraper Now"):
-            run_scraper()
-            st.rerun()
-    
-    # Global Search Bar
-    col1, col2 = st.columns([10,1])
-    with col1:
-        search = st.text_input("🔍", placeholder="Search jobs, skills, companies...", label_visibility="collapsed")
-    
-    # Apply filters
-    filtered_df = df.copy()
-    
-    if search:
-        filtered_df = filtered_df[
-            filtered_df.apply(
-                lambda row: search.lower() in str(row).lower(),
-                axis=1
-            )
-        ]
-    
-    if today_only:
-        today = datetime.now().strftime("%Y-%m-%d")
-        filtered_df = filtered_df[filtered_df["posting_date"] == today]
-    
-    # Sidebar Filters
-    with st.sidebar:
-        st.markdown("<h3 style='text-align: center; color: white;'>🎯 Advanced Filters</h3>", unsafe_allow_html=True)
-        st.markdown("---")
-        
-        company_list = ["All"] + sorted(filtered_df["company"].dropna().unique().tolist()) if not filtered_df.empty else ["All"]
-        company = st.selectbox("Company", company_list, help="Filter by company")
-        
-        location_list = ["All"] + sorted(filtered_df["location"].dropna().unique().tolist()) if not filtered_df.empty else ["All"]
-        location = st.selectbox("Location", location_list, help="Filter by location")
-        
-        min_score = st.slider("Min Match Score", 0, 100, 40, help="Minimum relevance score")
-    
-    # Apply sidebar filters
-    if not filtered_df.empty:
-        if company != "All":
-            filtered_df = filtered_df[filtered_df["company"] == company]
-        
-        if location != "All":
-            filtered_df = filtered_df[filtered_df["location"] == location]
-        
-        filtered_df = filtered_df[filtered_df["relevance_score"] >= min_score]
-    
-    # Results Summary
-    st.markdown(f"<p style='color: #666;'>Found <strong>{len(filtered_df)}</strong> jobs matching your criteria</p>", unsafe_allow_html=True)
-    
-    # Job Cards
-    if not filtered_df.empty:
-        for _, job in filtered_df.head(50).iterrows():
-            with st.container():
-                col1, col2, col3 = st.columns([5,2,1])
-                
-                with col1:
-                    st.markdown(f"### {job['title']}")
-                    st.markdown(f"🏢 {job['company']}  •  📍 {job['location']}")
-                    
-                    # Skills tags if available
-                    if 'skills' in job and pd.notna(job['skills']):
-                        skills = str(job['skills']).split(',')[:3]
-                        skills_html = " ".join([f"<span class='badge'>{skill.strip()}</span>" for skill in skills])
-                        st.markdown(skills_html + "...", unsafe_allow_html=True)
-                
-                with col2:
-                    # Circular progress indicator
-                    score = int(job["relevance_score"])
-                    st.markdown(f"""
-                    <div style='text-align: center;'>
-                        <div style='
-                            width: 60px;
-                            height: 60px;
-                            border-radius: 50%;
-                            background: conic-gradient(#667eea {score}%, #e0e0e0 {score}%);
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            margin: 10px auto;
-                        '>
-                            <div style='
-                                width: 50px;
-                                height: 50px;
-                                border-radius: 50%;
-                                background: white;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                font-weight: bold;
-                                color: #667eea;
-                            '>{score}%</div>
-                        </div>
-                        <p style='margin: 0; color: #666;'>Match Score</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-                with col3:
-                    if job["application_link"] and pd.notna(job["application_link"]):
-                        st.markdown(f"[Apply Now]({job['application_link']})")
-                    st.caption(f"📅 {job['posting_date']}")
-                
-                # Job description preview
-                with st.expander("View Description"):
-                    st.write(job["job_description"])
-                
-                st.divider()
-    else:
-        st.info("No jobs match your current filters. Try adjusting your search criteria.")
-
-elif selected == "Analytics":
-    # Analytics View
-    st.markdown("<h2><span class='gradient-text'>📈 Advanced Analytics</span></h2>", unsafe_allow_html=True)
-    
-    if not df.empty:
-        # Time-based analysis
-        df['posting_date'] = pd.to_datetime(df['posting_date'])
-        daily_counts = df.groupby(df['posting_date'].dt.date).size().reset_index(name='count')
-        
-        fig = px.line(
-            daily_counts, 
-            x='posting_date', 
-            y='count',
-            title='Job Postings Over Time',
-            markers=True
-        )
-        fig.update_traces(line_color='#667eea', line_width=3)
-        st.plotly_chart(fig, use_container_width=True)
-        
-        # Company analysis
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            top_companies = df['company'].value_counts().head(10)
-            fig = px.bar(
-                x=top_companies.values,
-                y=top_companies.index,
-                orientation='h',
-                title='Top Companies by Job Count',
-                color=top_companies.values,
-                color_continuous_scale='Purples'
-            )
-            st.plotly_chart(fig, use_container_width=True)
-        
-        with col2:
-            avg_score_by_company = df.groupby('company')['relevance_score'].mean().sort_values(ascending=False).head(10)
-            fig = px.bar(
-                x=avg_score_by_company.values,
-                y=avg_score_by_company.index,
-                orientation='h',
-                title='Average Match Score by Company',
-                color=avg_score_by_company.values,
-                color_continuous_scale='Purples'
-            )
-            st.plotly_chart(fig, use_container_width=True)
-        
-        # Location analysis
-        st.markdown("<h3><span class='gradient-text'>📍 Location Analysis</span></h3>", unsafe_allow_html=True)
-        location_counts = df['location'].value_counts().head(15)
-        fig = px.treemap(
-            names=location_counts.index,
-            parents=[''] * len(location_counts),
-            values=location_counts.values,
-            title='Job Distribution by Location'
-        )
-        st.plotly_chart(fig, use_container_width=True)
-    else:
-        st.info("No data available for analytics. Please add some jobs first.")
-
-elif selected == "Settings":
-    # Settings View
-    st.markdown("<h2><span class='gradient-text'>⚙️ Settings</span></h2>", unsafe_allow_html=True)
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("### 🔔 Notification Settings")
-        email_alerts = st.toggle("Email Alerts", value=True)
-        desktop_alerts = st.toggle("Desktop Notifications", value=False)
-        daily_digest = st.toggle("Daily Digest", value=True)
-        
-        st.markdown("### 🎨 Display Settings")
-        theme = st.selectbox("Theme", ["Light", "Dark", "System Default"])
-        items_per_page = st.slider("Items per page", 10, 100, 50)
-    
-    with col2:
-        st.markdown("### 🔧 Scraper Settings")
-        scraper_interval = st.selectbox(
-            "Scraper Interval",
-            ["Every hour", "Every 6 hours", "Every 12 hours", "Daily"]
-        )
-        
-        st.markdown("### 📊 Data Management")
-        if st.button("Clear Cache"):
-            st.cache_data.clear()
-            st.success("Cache cleared successfully!")
-        
-        if st.button("Export Data as CSV"):
-            if not df.empty:
-                csv = df.to_csv(index=False)
-                st.download_button(
-                    label="Download CSV",
-                    data=csv,
-                    file_name=f"jobs_export_{datetime.now().strftime('%Y%m%d')}.csv",
-                    mime="text/csv"
-                )
-            else:
-                st.warning("No data to export")
-        
-        if st.button("Reset Database"):
-            try:
-                # Drop and recreate tables
-                conn = sqlite3.connect(DB_PATH)
-                cursor = conn.cursor()
-                cursor.execute("DROP TABLE IF EXISTS jobs")
-                conn.commit()
-                conn.close()
-                
-                # Reinitialize database
-                st.cache_data.clear()
-                st.success("Database reset successfully!")
+    if show_apply and not applied:
+        c1, c2 = st.columns([1, 1])
+        with c1:
+            if link:
+                st.link_button("🔗 Apply Now", link, use_container_width=True)
+        with c2:
+            if st.button("✅ Mark Applied", key=f"{key_prefix}_{job_id}",
+                         use_container_width=True):
+                mark_applied(job_id)
                 st.rerun()
-            except Exception as e:
-                st.error(f"Error resetting database: {str(e)}")
-    
-    st.markdown("---")
-    st.markdown("### ℹ️ About")
-    st.info("AI Job Intelligence Portal v2.0 - Powered by Advanced AI and Machine Learning")
+    elif applied:
+        st.markdown("")
 
-# ===============================
-# FOOTER
-# ===============================
-st.markdown("---")
-st.markdown("""
-<div class='footer'>
-    <p>🚀 AI Job Intelligence Portal | © 2024 All Rights Reserved</p>
-    <p style='font-size: 0.8rem;'>Powered by Advanced AI & Machine Learning</p>
-</div>
-""", unsafe_allow_html=True)
+
+# ============================================================
+# MAIN APP
+# ============================================================
+def main():
+    # Header
+    st.markdown("""
+    <div class="portal-header">
+        <h1>🤖 AI Job Intelligence Portal</h1>
+        <p>Abhilash Dharmarajula · Automated Multi-Source Job Search</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Navigation tabs
+    tabs = st.tabs(["📊 Dashboard", "💼 Jobs", "✅ Applications", "📈 Analytics", "⚙️ Control"])
+
+    stats = get_stats()
+
+    # ===========================================================
+    # TAB 1: DASHBOARD
+    # ===========================================================
+    with tabs[0]:
+        # Metrics row
+        c1, c2, c3, c4 = st.columns(4)
+        for col, num, label in [
+            (c1, stats["total"],   "Total Jobs"),
+            (c2, stats["pending"], "Pending"),
+            (c3, stats["high"],    "High Match (65%+)"),
+            (c4, stats["applied"], "Applied"),
+        ]:
+            with col:
+                st.markdown(f"""
+                <div class="metric-box">
+                    <div class="num">{num:,}</div>
+                    <div class="lbl">{label}</div>
+                </div>
+                """, unsafe_allow_html=True)
+                st.write("")
+
+        # Status + Run Now
+        scraper_st = st.session_state.scraper_status
+        msg = st.session_state.scraper_message
+
+        st.markdown(f"""
+        <div class="status-bar">
+            <b>Scraper:</b>
+            {"🔄 Running in background... Check back in 10-15 minutes" if scraper_st == "running"
+            else msg if msg
+            else "⏸️ Idle — Click Run Now to scrape fresh jobs"}
+            {"<br><small>Last run: " + st.session_state.last_run_time.strftime("%Y-%m-%d %H:%M") + "</small>"
+            if st.session_state.last_run_time else ""}
+        </div>
+        """, unsafe_allow_html=True)
+
+        run_col, refresh_col = st.columns([2, 1])
+        with run_col:
+            if scraper_st != "running":
+                if st.button("▶ Run Scraper Now", use_container_width=True):
+                    start_scraper()
+                    st.info("🚀 Scraper started! It runs in background. Refresh page in 10-15 min.")
+                    st.rerun()
+            else:
+                st.info("⏳ Scraper running in background...")
+        with refresh_col:
+            if st.button("🔄 Refresh Page", use_container_width=True):
+                st.rerun()
+
+        # Auto-refresh while running
+        if scraper_st == "running":
+            time.sleep(0.1)
+            st.rerun()
+
+        st.markdown("---")
+
+        # Top 10 jobs
+        st.subheader("🔥 Top Matches Right Now")
+        df_top = run_query("""
+            SELECT job_id, title, company, location, relevance_score,
+                   application_link, experience_required, applied,
+                   source_platform, company_type
+            FROM jobs
+            WHERE applied = 0
+            ORDER BY relevance_score DESC, scraped_date DESC
+            LIMIT 10
+        """)
+
+        if df_top.empty:
+            st.warning("📭 No jobs yet. Click **Run Scraper Now** to fetch fresh jobs!")
+        else:
+            for _, row in df_top.iterrows():
+                render_job_card(row.to_dict(), key_prefix="dash")
+
+    # ===========================================================
+    # TAB 2: ALL JOBS
+    # ===========================================================
+    with tabs[1]:
+        st.subheader("💼 Job Browser")
+
+        # Filters
+        fc1, fc2, fc3, fc4 = st.columns([2, 1, 1, 1])
+        with fc1:
+            search = st.text_input("🔍 Search title / company",
+                                   placeholder="data analyst, SQL, Goldman...")
+        with fc2:
+            min_score = st.slider("Min Score %", 0, 100, 40)
+        with fc3:
+            source_opts = ["All Sources", "Naukri", "LinkedIn", "Greenhouse (Direct API)",
+                           "Lever (Direct API)", "Workday (Direct API)",
+                           "SmartRecruiters (Direct API)", "Indeed",
+                           "Instahyre", "Company Career Page"]
+            sel_source = st.selectbox("Source", source_opts)
+        with fc4:
+            show_applied = st.checkbox("Show Applied", False)
+
+        # Build query
+        where = f"WHERE relevance_score >= {min_score}"
+        if not show_applied:
+            where += " AND applied = 0"
+        if search:
+            s = search.replace("'", "")
+            where += f" AND (LOWER(title) LIKE '%{s.lower()}%' OR LOWER(company) LIKE '%{s.lower()}%')"
+        if sel_source != "All Sources":
+            where += f" AND source_platform = '{sel_source}'"
+
+        df = run_query(f"""
+            SELECT job_id, title, company, location, experience_required,
+                   relevance_score, application_link, source_platform,
+                   company_type, applied
+            FROM jobs {where}
+            ORDER BY relevance_score DESC, scraped_date DESC
+            LIMIT 100
+        """)
+
+        if df.empty:
+            st.info("No jobs match your filters.")
+        else:
+            st.caption(f"Showing **{len(df)}** jobs")
+            for _, row in df.iterrows():
+                render_job_card(row.to_dict(), key_prefix="browse")
+
+    # ===========================================================
+    # TAB 3: APPLICATIONS TRACKER
+    # ===========================================================
+    with tabs[2]:
+        st.subheader("✅ Application Tracker")
+
+        df_apps = run_query("""
+            SELECT j.title, j.company, j.location, j.application_link,
+                   j.relevance_score, j.scraped_date, j.source_platform
+            FROM jobs j
+            WHERE j.applied = 1
+            ORDER BY j.scraped_date DESC
+        """)
+
+        if df_apps.empty:
+            st.info("No applications yet. Mark jobs as applied to track them here.")
+        else:
+            st.metric("Total Applications", len(df_apps))
+
+            # Summary
+            by_source = df_apps.groupby("source_platform").size().reset_index(name="count")
+            if not by_source.empty:
+                fig = px.pie(by_source, values="count", names="source_platform",
+                             title="Applications by Source",
+                             color_discrete_sequence=px.colors.sequential.Viridis)
+                fig.update_layout(height=250, margin=dict(t=30, b=0))
+                st.plotly_chart(fig, use_container_width=True)
+
+            # Table
+            display_df = df_apps[["title", "company", "location", "source_platform"]].copy()
+            display_df.columns = ["Role", "Company", "Location", "Source"]
+            st.dataframe(display_df, use_container_width=True, hide_index=True)
+
+            # Links
+            st.markdown("### 🔗 Quick Apply Links")
+            for _, row in df_apps.iterrows():
+                if row.get("application_link"):
+                    st.markdown(f"- [{row['title']} @ {row['company']}]({row['application_link']})")
+
+    # ===========================================================
+    # TAB 4: ANALYTICS
+    # ===========================================================
+    with tabs[3]:
+        st.subheader("📈 Market Analytics")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            # Top companies hiring
+            df_co = run_query("""
+                SELECT company, COUNT(*) as jobs, ROUND(AVG(relevance_score),0) as avg_match
+                FROM jobs WHERE applied=0 AND relevance_score >= 50
+                GROUP BY company ORDER BY jobs DESC LIMIT 15
+            """)
+            if not df_co.empty:
+                fig = px.bar(df_co, x="jobs", y="company", orientation="h",
+                             color="avg_match", color_continuous_scale="Viridis",
+                             title="Top 15 Companies with Matching Jobs",
+                             labels={"jobs": "Job Count", "company": ""})
+                fig.update_layout(height=400, showlegend=False,
+                                  coloraxis_showscale=False)
+                st.plotly_chart(fig, use_container_width=True)
+
+        with col2:
+            # Source breakdown
+            df_src = run_query("""
+                SELECT source_platform, COUNT(*) as jobs
+                FROM jobs GROUP BY source_platform ORDER BY jobs DESC
+            """)
+            if not df_src.empty:
+                fig2 = px.pie(df_src, values="jobs", names="source_platform",
+                              title="Jobs by Source Platform",
+                              color_discrete_sequence=px.colors.qualitative.Pastel)
+                fig2.update_layout(height=400)
+                st.plotly_chart(fig2, use_container_width=True)
+
+        # Score distribution
+        df_score = run_query("""
+            SELECT
+                CASE
+                    WHEN relevance_score>=80 THEN '80-100% (Excellent)'
+                    WHEN relevance_score>=65 THEN '65-79% (Good)'
+                    WHEN relevance_score>=50 THEN '50-64% (Okay)'
+                    WHEN relevance_score>=35 THEN '35-49% (Low)'
+                    ELSE 'Below 35%'
+                END as bucket, COUNT(*) as count
+            FROM jobs GROUP BY bucket ORDER BY min(relevance_score) DESC
+        """)
+        if not df_score.empty:
+            fig3 = px.bar(df_score, x="bucket", y="count",
+                          title="Match Score Distribution",
+                          color="count", color_continuous_scale="Blues")
+            fig3.update_layout(height=280, showlegend=False)
+            st.plotly_chart(fig3, use_container_width=True)
+
+        # Daily trend
+        df_trend = run_query("""
+            SELECT DATE(scraped_date) as date, COUNT(*) as jobs
+            FROM jobs GROUP BY DATE(scraped_date) ORDER BY date DESC LIMIT 14
+        """)
+        if not df_trend.empty:
+            fig4 = px.line(df_trend.sort_values("date"), x="date", y="jobs",
+                           title="Jobs Found Per Day (Last 14 Days)", markers=True)
+            fig4.update_layout(height=250)
+            st.plotly_chart(fig4, use_container_width=True)
+
+    # ===========================================================
+    # TAB 5: CONTROL PANEL
+    # ===========================================================
+    with tabs[4]:
+        st.subheader("⚙️ Control Panel")
+
+        # Environment info
+        env_type = "☁️ Render Cloud" if IS_RENDER else "💻 Local Machine"
+        st.info(f"**Environment:** {env_type}")
+
+        # Manual scraper trigger
+        st.markdown("### 🤖 Run Scraper")
+        scraper_st = st.session_state.scraper_status
+        msg = st.session_state.scraper_message
+
+        if scraper_st == "running":
+            st.warning("⏳ Scraper currently running in background...")
+        else:
+            last = st.session_state.last_run_time
+            if last:
+                st.success(f"{msg}  |  Last run: {last.strftime('%Y-%m-%d %H:%M')}")
+            if st.button("▶ Start Full Scrape", use_container_width=True):
+                start_scraper()
+                st.rerun()
+
+        st.markdown("---")
+
+        # DB management
+        st.markdown("### 🗄️ Database")
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Total Jobs",  stats["total"])
+        c2.metric("Pending",     stats["pending"])
+        c3.metric("High Match",  stats["high"])
+        c4.metric("Applied",     stats["applied"])
+
+        if st.button("🗑️ Clear Old Irrelevant Jobs (< 40% + > 30 days)"):
+            run_write("""
+                DELETE FROM jobs
+                WHERE relevance_score < 40
+                  AND scraped_date < date('now', '-30 days')
+                  AND applied = 0
+            """)
+            st.success("Done!")
+            st.rerun()
+
+        st.markdown("---")
+
+        # Mobile app instructions
+        st.markdown("### 📱 Access on Mobile")
+        deploy_url = os.environ.get("RENDER_EXTERNAL_URL", "your-app.onrender.com")
+        st.code(f"""
+Your App URL:
+  https://{deploy_url}
+
+To add to Phone Home Screen:
+  1. Open Chrome on your phone
+  2. Go to the URL above
+  3. Tap the 3 dots menu (⋮)
+  4. Tap "Add to Home screen"
+  5. Tap "Add"
+
+You now have a native-like app icon!
+""")
+
+        # Schedule info
+        st.markdown("### ⏰ Auto-Schedule on Render (Free)")
+        st.markdown("""
+**Set up auto-scraping every 6 hours:**
+
+1. Go to **Render Dashboard** → Your Project
+2. Click **+ New** → **Cron Job**
+3. Settings:
+   - **Name:** `job-scraper-6h`
+   - **Command:** `python main.py`
+   - **Schedule:** `0 */6 * * *`
+   - **Environment:** Copy from web service
+4. **Cost:** $0 (included in free tier!)
+
+Your jobs will auto-update at:
+- 12:00 AM, 6:00 AM, 12:00 PM, 6:00 PM
+        """)
+
+        # Source control
+        st.markdown("### 🔧 Scraping Sources")
+        sources_info = {
+            "Naukri (Selenium)":        "✅ Local | ❌ Render",
+            "LinkedIn (Selenium)":       "✅ Local | ❌ Render",
+            "Greenhouse API":            "✅ Local | ✅ Render",
+            "Lever API":                 "✅ Local | ✅ Render",
+            "Workday API":               "✅ Local | ✅ Render",
+            "SmartRecruiters API":       "✅ Local | ✅ Render",
+            "Indeed (requests)":         "✅ Local | ✅ Render",
+            "Instahyre (requests)":      "✅ Local | ✅ Render",
+            "Company Pages (requests)":  "✅ Local | ✅ Render",
+        }
+        for src, status in sources_info.items():
+            st.caption(f"**{src}** — {status}")
+
+
+# ============================================================
+# ENTRY POINT
+# ============================================================
+if __name__ == "__main__":
+    main()

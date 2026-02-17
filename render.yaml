@@ -1,0 +1,64 @@
+services:
+  # ============================================================
+  # WEB SERVICE - Streamlit Dashboard
+  # ============================================================
+  - type: web
+    name: job-intelligence-portal
+    env: python
+    region: singapore
+    plan: free
+
+    buildCommand: |
+      pip install -r requirements.txt
+
+    startCommand: >
+      streamlit run app.py
+      --server.port=$PORT
+      --server.address=0.0.0.0
+      --server.headless=true
+      --server.enableCORS=false
+      --server.enableXsrfProtection=false
+
+    envVars:
+      - key: RENDER
+        value: "true"
+      - key: EMAIL_SENDER
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: DB_PATH
+        value: /opt/render/project/src/database/jobs.db
+      - key: COMPANY_JSON_PATH
+        value: /opt/render/project/src/data/companies.json
+
+    disk:
+      name: jobs-database
+      mountPath: /opt/render/project/src/database
+      sizeGB: 1
+
+  # ============================================================
+  # CRON JOB - Auto-scrape every 6 hours
+  # ============================================================
+  - type: cron
+    name: job-scraper-6h
+    env: python
+    region: singapore
+    plan: free
+    schedule: "0 */6 * * *"
+
+    buildCommand: |
+      pip install -r requirements.txt
+
+    startCommand: python main.py
+
+    envVars:
+      - key: RENDER
+        value: "true"
+      - key: EMAIL_SENDER
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: DB_PATH
+        value: /opt/render/project/src/database/jobs.db
+      - key: COMPANY_JSON_PATH
+        value: /opt/render/project/src/data/companies.json
