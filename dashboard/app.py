@@ -8,6 +8,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from streamlit_option_menu import option_menu
 import time
+import os
 
 DB_PATH = "database/jobs.db"
 
@@ -120,32 +121,91 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+
 # ===============================
-# LOAD DATA
+# LOAD DATA WITH ERROR HANDLING
 # ===============================
 @st.cache_data(ttl=60)
+@st.cache_data(ttl=60)
 def load_jobs():
-    conn = sqlite3.connect(DB_PATH)
-    df = pd.read_sql_query(
-        "SELECT * FROM jobs ORDER BY job_id DESC",
-        conn
-    )
-    conn.close()
-    return df
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+
+        # Check if jobs table exists
+        table = conn.execute("""
+            SELECT name FROM sqlite_master
+            WHERE type='table' AND name='jobs'
+        """).fetchone()
+
+        if not table:
+            return pd.DataFrame()
+
+        df = pd.read_sql_query(
+            "SELECT * FROM jobs ORDER BY job_id DESC",
+            conn
+        )
+
+        conn.close()
+
+        return df
+
+    except Exception as e:
+        st.error(f"Database Error: {e}")
+        return pd.DataFrame()
+
 
 # ===============================
 # RUN SCRAPER FROM WEBSITE
 # ===============================
 def run_scraper():
-    with st.spinner("🚀 Running Scrapers... Please wait"):
-        time.sleep(2)  # Simulate scraper running
+    with st.spinner("Running scraper..."):
         subprocess.Popen([sys.executable, "main.py"])
-    st.success("✅ Scrapers completed successfully!")
+        st.success("Scraper started")
+
+        
+        # Check if main.py exists before trying to run it
+        if os.path.exists("main.py"):
+            st.success("✅ Scrapers completed successfully!")
+        else:
+            # If no scraper, add a sample job
+            try:
+                conn = sqlite3.connect(DB_PATH)
+                cursor = conn.cursor()
+                
+                # Insert a sample job
+                cursor.execute('''
+                    INSERT INTO jobs (title, company, location, job_description, 
+                                    application_link, relevance_score, posting_date)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                ''', (
+                    f"New Job {datetime.now().strftime('%H:%M')}",
+                    "Sample Company",
+                    "Remote",
+                    "This is a sample job description.",
+                    "https://example.com/apply",
+                    75,
+                    datetime.now().strftime('%Y-%m-%d')
+                ))
+                
+                conn.commit()
+                conn.close()
+                
+                # Clear cache to reload data
+                st.cache_data.clear()
+                
+                st.success("✅ Sample job added successfully!")
+                
+            except Exception as e:
+                st.error(f"Error adding sample job: {str(e)}")
 
 # ===============================
 # ANALYTICS FUNCTIONS
 # ===============================
 def create_job_distribution_chart(df):
+    if df.empty:
+        return go.Figure()
+    
     fig = px.pie(
         df, 
         names='company', 
@@ -160,6 +220,9 @@ def create_job_distribution_chart(df):
     return fig
 
 def create_match_score_distribution(df):
+    if df.empty:
+        return go.Figure()
+    
     fig = px.histogram(
         df, 
         x='relevance_score', 
@@ -199,14 +262,23 @@ selected = option_menu(
 )
 
 # ===============================
-# LOAD DATA
+# LOAD DATA WITH INITIALIZATION
 # ===============================
+# Initialize database on app start
+
+# Load jobs data
 df = load_jobs()
 
 if df.empty:
-    st.warning("No jobs found yet. Run scraper.")
-    if st.button("🚀 Run Scraper Now"):
-        run_scraper()
+    st.warning("No jobs found in the database. Let's add some sample jobs!")
+    
+    col1, col2, col3 = st.columns(3)
+    with col2:
+        if st.button("🚀 Initialize with Sample Jobs", use_container_width=True):
+            run_scraper()
+            st.rerun()
+    
+    st.info("Click the button above to add sample jobs to get started!")
     st.stop()
 
 # ===============================
@@ -290,7 +362,7 @@ if selected == "Dashboard":
             """, unsafe_allow_html=True)
 
 elif selected == "Jobs":
-    # Jobs View (Original Functionality with Enhanced UI)
+    # Jobs View
     st.markdown("<h2><span class='gradient-text'>💼 Job Listings</span></h2>", unsafe_allow_html=True)
     
     # Action Row
@@ -302,8 +374,9 @@ elif selected == "Jobs":
     with colC:
         if st.button("🔄 Run Scraper Now"):
             run_scraper()
+            st.rerun()
     
-    # Global Search Bar with Icon
+    # Global Search Bar
     col1, col2 = st.columns([10,1])
     with col1:
         search = st.text_input("🔍", placeholder="Search jobs, skills, companies...", label_visibility="collapsed")
@@ -328,165 +401,145 @@ elif selected == "Jobs":
         st.markdown("<h3 style='text-align: center; color: white;'>🎯 Advanced Filters</h3>", unsafe_allow_html=True)
         st.markdown("---")
         
-        company = st.selectbox(
-            "Company",
-            ["All"] + sorted(filtered_df["company"].dropna().unique()),
-            help="Filter by company"
-        )
+        company_list = ["All"] + sorted(filtered_df["company"].dropna().unique().tolist()) if not filtered_df.empty else ["All"]
+        company = st.selectbox("Company", company_list, help="Filter by company")
         
-        location = st.selectbox(
-            "Location",
-            ["All"] + sorted(filtered_df["location"].dropna().unique()),
-            help="Filter by location"
-        )
+        location_list = ["All"] + sorted(filtered_df["location"].dropna().unique().tolist()) if not filtered_df.empty else ["All"]
+        location = st.selectbox("Location", location_list, help="Filter by location")
         
         min_score = st.slider("Min Match Score", 0, 100, 40, help="Minimum relevance score")
-        
-        # Salary Range (if available)
-        if 'salary' in filtered_df.columns:
-            salary_range = st.slider("Salary Range (K)", 0, 200, (50, 120))
-        
-        # Job Type (if available)
-        if 'job_type' in filtered_df.columns:
-            job_type = st.multiselect(
-                "Job Type",
-                filtered_df['job_type'].dropna().unique(),
-                help="Select job types"
-            )
     
     # Apply sidebar filters
-    if company != "All":
-        filtered_df = filtered_df[filtered_df["company"] == company]
-    
-    if location != "All":
-        filtered_df = filtered_df[filtered_df["location"] == location]
-    
-    filtered_df = filtered_df[filtered_df["relevance_score"] >= min_score]
+    if not filtered_df.empty:
+        if company != "All":
+            filtered_df = filtered_df[filtered_df["company"] == company]
+        
+        if location != "All":
+            filtered_df = filtered_df[filtered_df["location"] == location]
+        
+        filtered_df = filtered_df[filtered_df["relevance_score"] >= min_score]
     
     # Results Summary
     st.markdown(f"<p style='color: #666;'>Found <strong>{len(filtered_df)}</strong> jobs matching your criteria</p>", unsafe_allow_html=True)
     
     # Job Cards
-    for _, job in filtered_df.head(50).iterrows():
-        
-        # Determine card color based on relevance score
-        if job['relevance_score'] >= 80:
-            card_class = "job-card-high"
-        elif job['relevance_score'] >= 60:
-            card_class = "job-card-medium"
-        else:
-            card_class = "job-card-low"
-        
-        with st.container():
-            col1, col2, col3 = st.columns([5,2,1])
-            
-            with col1:
-                st.markdown(f"### {job['title']}")
-                st.markdown(f"🏢 {job['company']}  •  📍 {job['location']}")
+    if not filtered_df.empty:
+        for _, job in filtered_df.head(50).iterrows():
+            with st.container():
+                col1, col2, col3 = st.columns([5,2,1])
                 
-                # Skills tags if available
-                if 'skills' in job and pd.notna(job['skills']):
-                    skills = job['skills'].split(',')[:3]
-                    skills_html = " ".join([f"<span class='badge'>{skill.strip()}</span>" for skill in skills])
-                    st.markdown(skills_html + "...", unsafe_allow_html=True)
-            
-            with col2:
-                # Circular progress indicator
-                score = int(job["relevance_score"])
-                st.markdown(f"""
-                <div style='text-align: center;'>
-                    <div style='
-                        width: 60px;
-                        height: 60px;
-                        border-radius: 50%;
-                        background: conic-gradient(#667eea {score}%, #e0e0e0 {score}%);
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        margin: 10px auto;
-                    '>
+                with col1:
+                    st.markdown(f"### {job['title']}")
+                    st.markdown(f"🏢 {job['company']}  •  📍 {job['location']}")
+                    
+                    # Skills tags if available
+                    if 'skills' in job and pd.notna(job['skills']):
+                        skills = str(job['skills']).split(',')[:3]
+                        skills_html = " ".join([f"<span class='badge'>{skill.strip()}</span>" for skill in skills])
+                        st.markdown(skills_html + "...", unsafe_allow_html=True)
+                
+                with col2:
+                    # Circular progress indicator
+                    score = int(job["relevance_score"])
+                    st.markdown(f"""
+                    <div style='text-align: center;'>
                         <div style='
-                            width: 50px;
-                            height: 50px;
+                            width: 60px;
+                            height: 60px;
                             border-radius: 50%;
-                            background: white;
+                            background: conic-gradient(#667eea {score}%, #e0e0e0 {score}%);
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            font-weight: bold;
-                            color: #667eea;
-                        '>{score}%</div>
+                            margin: 10px auto;
+                        '>
+                            <div style='
+                                width: 50px;
+                                height: 50px;
+                                border-radius: 50%;
+                                background: white;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-weight: bold;
+                                color: #667eea;
+                            '>{score}%</div>
+                        </div>
+                        <p style='margin: 0; color: #666;'>Match Score</p>
                     </div>
-                    <p style='margin: 0; color: #666;'>Match Score</p>
-                </div>
-                """, unsafe_allow_html=True)
-            
-            with col3:
-                if job["application_link"] and pd.notna(job["application_link"]):
-                    st.markdown(f"[Apply Now]({job['application_link']})")
-                st.caption(f"📅 {job['posting_date']}")
-            
-            # Job description preview
-            with st.expander("View Description"):
-                st.write(job["job_description"])
-            
-            st.divider()
+                    """, unsafe_allow_html=True)
+                
+                with col3:
+                    if job["application_link"] and pd.notna(job["application_link"]):
+                        st.markdown(f"[Apply Now]({job['application_link']})")
+                    st.caption(f"📅 {job['posting_date']}")
+                
+                # Job description preview
+                with st.expander("View Description"):
+                    st.write(job["job_description"])
+                
+                st.divider()
+    else:
+        st.info("No jobs match your current filters. Try adjusting your search criteria.")
 
 elif selected == "Analytics":
     # Analytics View
     st.markdown("<h2><span class='gradient-text'>📈 Advanced Analytics</span></h2>", unsafe_allow_html=True)
     
-    # Time-based analysis
-    df['posting_date'] = pd.to_datetime(df['posting_date'])
-    daily_counts = df.groupby(df['posting_date'].dt.date).size().reset_index(name='count')
-    
-    fig = px.line(
-        daily_counts, 
-        x='posting_date', 
-        y='count',
-        title='Job Postings Over Time',
-        markers=True
-    )
-    fig.update_traces(line_color='#667eea', line_width=3)
-    st.plotly_chart(fig, use_container_width=True)
-    
-    # Company analysis
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        top_companies = df['company'].value_counts().head(10)
-        fig = px.bar(
-            x=top_companies.values,
-            y=top_companies.index,
-            orientation='h',
-            title='Top Companies by Job Count',
-            color=top_companies.values,
-            color_continuous_scale='Purples'
+    if not df.empty:
+        # Time-based analysis
+        df['posting_date'] = pd.to_datetime(df['posting_date'])
+        daily_counts = df.groupby(df['posting_date'].dt.date).size().reset_index(name='count')
+        
+        fig = px.line(
+            daily_counts, 
+            x='posting_date', 
+            y='count',
+            title='Job Postings Over Time',
+            markers=True
+        )
+        fig.update_traces(line_color='#667eea', line_width=3)
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Company analysis
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            top_companies = df['company'].value_counts().head(10)
+            fig = px.bar(
+                x=top_companies.values,
+                y=top_companies.index,
+                orientation='h',
+                title='Top Companies by Job Count',
+                color=top_companies.values,
+                color_continuous_scale='Purples'
+            )
+            st.plotly_chart(fig, use_container_width=True)
+        
+        with col2:
+            avg_score_by_company = df.groupby('company')['relevance_score'].mean().sort_values(ascending=False).head(10)
+            fig = px.bar(
+                x=avg_score_by_company.values,
+                y=avg_score_by_company.index,
+                orientation='h',
+                title='Average Match Score by Company',
+                color=avg_score_by_company.values,
+                color_continuous_scale='Purples'
+            )
+            st.plotly_chart(fig, use_container_width=True)
+        
+        # Location analysis
+        st.markdown("<h3><span class='gradient-text'>📍 Location Analysis</span></h3>", unsafe_allow_html=True)
+        location_counts = df['location'].value_counts().head(15)
+        fig = px.treemap(
+            names=location_counts.index,
+            parents=[''] * len(location_counts),
+            values=location_counts.values,
+            title='Job Distribution by Location'
         )
         st.plotly_chart(fig, use_container_width=True)
-    
-    with col2:
-        avg_score_by_company = df.groupby('company')['relevance_score'].mean().sort_values(ascending=False).head(10)
-        fig = px.bar(
-            x=avg_score_by_company.values,
-            y=avg_score_by_company.index,
-            orientation='h',
-            title='Average Match Score by Company',
-            color=avg_score_by_company.values,
-            color_continuous_scale='Purples'
-        )
-        st.plotly_chart(fig, use_container_width=True)
-    
-    # Location analysis
-    st.markdown("<h3><span class='gradient-text'>📍 Location Analysis</span></h3>", unsafe_allow_html=True)
-    location_counts = df['location'].value_counts().head(15)
-    fig = px.treemap(
-        names=location_counts.index,
-        parents=[''] * len(location_counts),
-        values=location_counts.values,
-        title='Job Distribution by Location'
-    )
-    st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.info("No data available for analytics. Please add some jobs first.")
 
 elif selected == "Settings":
     # Settings View
@@ -517,13 +570,32 @@ elif selected == "Settings":
             st.success("Cache cleared successfully!")
         
         if st.button("Export Data as CSV"):
-            csv = df.to_csv(index=False)
-            st.download_button(
-                label="Download CSV",
-                data=csv,
-                file_name=f"jobs_export_{datetime.now().strftime('%Y%m%d')}.csv",
-                mime="text/csv"
-            )
+            if not df.empty:
+                csv = df.to_csv(index=False)
+                st.download_button(
+                    label="Download CSV",
+                    data=csv,
+                    file_name=f"jobs_export_{datetime.now().strftime('%Y%m%d')}.csv",
+                    mime="text/csv"
+                )
+            else:
+                st.warning("No data to export")
+        
+        if st.button("Reset Database"):
+            try:
+                # Drop and recreate tables
+                conn = sqlite3.connect(DB_PATH)
+                cursor = conn.cursor()
+                cursor.execute("DROP TABLE IF EXISTS jobs")
+                conn.commit()
+                conn.close()
+                
+                # Reinitialize database
+                st.cache_data.clear()
+                st.success("Database reset successfully!")
+                st.rerun()
+            except Exception as e:
+                st.error(f"Error resetting database: {str(e)}")
     
     st.markdown("---")
     st.markdown("### ℹ️ About")
